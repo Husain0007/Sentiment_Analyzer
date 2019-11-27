@@ -22,10 +22,10 @@ class TwitterStreamer():
     ## We will save the tweets to the "fetched_tweet_filename"
     ## instead of tweets just appearing on the terminal
     ## For filtering the tweets we can use a "hash_tag_list"
-    def stream_tweets(self, fetched_tweet_filename, has_tag_list):
+    def stream_tweets(self, fetched_tweets_filename, has_tag_list):
         # This handles Twitter authetication and the connection to
         # the Twitter Streaming API
-            listener = TwitterListener(fetched_tweet_filename)
+            listener = TwitterListener(fetched_tweets_filename)
             auth = self.twitter_authenticator.authenticate_twitter_app()
             stream = Stream(auth, listener)
             stream.filter(track=hash_tag_list)
@@ -61,8 +61,8 @@ class TwitterListener(StreamListener):
 ## Creating Object from "StdOutListener" class
 if __name__ == "__main__":
     hash_tag_list = ['donald trump', 'hillary clinton', 'barack obama', 'bernine sanders']
-    fetched_tweet_filename = "tweets.json"
+    fetched_tweets_filename = "tweets.json"
 
     ## Define TwitterStreamer object
     twitter_streamer = TwitterStreamer()
-    twitter_streamer.stream_tweets(fetched_tweet_filename, hash_tag_list)
+    twitter_streamer.stream_tweets(fetched_tweets_filename, hash_tag_list)
